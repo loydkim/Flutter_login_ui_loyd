@@ -2,7 +2,7 @@
 
 A new Flutter application.
 
-![Image description](https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png?raw=true){:height="700px" width="400px"}
+![Image description](https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png?v=4&s=200)
 
 
 * Develop environment.
