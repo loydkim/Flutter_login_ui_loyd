@@ -3,6 +3,7 @@ import 'package:signupexample/SignUp/signupform.dart';
 import 'package:signupexample/SignUp/signupimages.dart';
 import 'package:signupexample/SignUp/signupintroduce.dart';
 
+
 class SignUpWithMail extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SignUpWithMail();

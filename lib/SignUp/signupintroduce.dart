@@ -5,7 +5,7 @@ class SignUpIntroduce extends StatefulWidget {
   State<StatefulWidget> createState() => _SignUpIntroduce();
 }
 
-class _SignUpIntroduce extends State<SignUpIntroduce> {
+class _SignUpIntroduce extends State<SignUpIntroduce> with AutomaticKeepAliveClientMixin<SignUpIntroduce>{
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,4 +32,7 @@ class _SignUpIntroduce extends State<SignUpIntroduce> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

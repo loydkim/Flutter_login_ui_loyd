@@ -5,7 +5,7 @@ class SignUpForm extends StatefulWidget {
   State<StatefulWidget> createState() => _SignUpForm();
 }
 enum SingingCharacter { lafayette, jefferson }
-class _SignUpForm extends State<SignUpForm> {
+class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<SignUpForm> {
 
   bool _agreedToTOS = false;
   SingingCharacter _character = SingingCharacter.lafayette;
@@ -198,4 +198,7 @@ class _SignUpForm extends State<SignUpForm> {
       _agreedToTOS = newValue;
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
