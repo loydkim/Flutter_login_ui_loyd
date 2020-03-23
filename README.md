@@ -2,11 +2,7 @@
 
 A new Flutter application.
 
-![alt-text-1]<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png" width="300" height="530"> ![alt-text-2]<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main2.png" width="300" height="530">
-
-
-<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png" width="300" height="530">
-<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main2.png" width="300" height="530">
+<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png" width="300" height="530"> ![alt-text-2]<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main2.png" width="300" height="530">
 
 
 When starting the application first time, they usually request sign up or sign in to get user information. Here is how to make the sign-in screen.
