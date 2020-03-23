@@ -2,6 +2,8 @@
 
 A new Flutter application.
 
+<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png" width="300" height="530">
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
