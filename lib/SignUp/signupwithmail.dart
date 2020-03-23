@@ -11,16 +11,17 @@ class SignUpWithMail extends StatefulWidget {
 
 class _SignUpWithMail extends State<SignUpWithMail> {
 
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
   PageController _pageController = PageController();
 
-  String nextText = 'Next';
-  Color nextColor = Colors.green[800];
+  String _nextText = 'Next';
+  Color _nextColor = Colors.green[800];
+
   @override
   void dispose() {
-    emailTextController.dispose();
-    passwordTextController.dispose();
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
     super.dispose();
   }
 
@@ -64,13 +65,13 @@ class _SignUpWithMail extends State<SignUpWithMail> {
                         print('the pageView page is $page');
                         if (page == 2) {
                           setState(() {
-                            nextText = 'Submit';
-                            nextColor = Colors.blue[900];
+                            _nextText = 'Submit';
+                            _nextColor = Colors.blue[900];
                           });
                         }else {
                           setState(() {
-                            nextText = 'Next';
-                            nextColor = Colors.green[800];
+                            _nextText = 'Next';
+                            _nextColor = Colors.green[800];
                           });
                         }
                       },
@@ -84,7 +85,31 @@ class _SignUpWithMail extends State<SignUpWithMail> {
                   ),
                   Row(
                     children: <Widget>[
-                      _cancelSignupButtonWithMail(),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:8.0,right: 8.0),
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(12.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'Cancel',
+                                  style: TextStyle(fontSize: 28),
+                                ),
+                              ],
+                            ),
+                            textColor: Colors.black,
+                            color: Colors.white,
+                            padding: EdgeInsets.all(10),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ),
                       Flexible(
                         child: Padding(
                           padding: const EdgeInsets.only(left:8.0,right: 8.0),
@@ -96,13 +121,13 @@ class _SignUpWithMail extends State<SignUpWithMail> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  nextText,
+                                  _nextText,
                                   style: TextStyle(fontSize: 28),
                                 ),
                               ],
                             ),
                             textColor: Colors.white,
-                            color: nextColor,
+                            color: _nextColor,
                             padding: EdgeInsets.all(10),
                             onPressed: () {
                               _pageController.animateToPage(_pageController.page.toInt()+1, duration: Duration(milliseconds: 200), curve: Curves.easeIn);
@@ -118,34 +143,6 @@ class _SignUpWithMail extends State<SignUpWithMail> {
           ],
         ),
       )
-      ),
-    );
-  }
-
-  Widget _cancelSignupButtonWithMail() {
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.only(left:8.0,right: 8.0),
-        child: RaisedButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(12.0),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Cancel',
-                style: TextStyle(fontSize: 28),
-              ),
-            ],
-          ),
-          textColor: Colors.black,
-          color: Colors.white,
-          padding: EdgeInsets.all(10),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
     );
   }

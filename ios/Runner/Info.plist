@@ -39,7 +39,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To get images for profile</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To get images for profile</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To get images for profile</string>
 </dict>
 </plist>

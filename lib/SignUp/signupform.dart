@@ -4,31 +4,37 @@ class SignUpForm extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SignUpForm();
 }
-enum SingingCharacter { lafayette, jefferson }
+enum GenderEnum { man, woman }
 class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<SignUpForm> {
 
-  bool _agreedToTOS = false;
-  SingingCharacter _character = SingingCharacter.lafayette;
+  bool _agreedToTerm = false;
+  GenderEnum _character = GenderEnum.man;
 
-  DateTime selectedDate = DateTime.now();
-  String selectDate = 'Select your birthday';
+  DateTime _selectedDate = DateTime.now();
+  String _selectDateString = 'Select your birthday';
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: _selectedDate,
         firstDate: DateTime(1930, 8),
-
         lastDate: DateTime(2101));
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != _selectedDate)
       setState(() {
-        selectedDate = picked;
-        selectDate = "${selectedDate.toLocal()}".split(' ')[0];
+        _selectedDate = picked;
+        _selectDateString = "${_selectedDate.toLocal()}".split(' ')[0];
       });
+  }
+
+  void _setAgreedToTerm(bool newValue) {
+    setState(() {
+      _agreedToTerm = newValue;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       margin: const EdgeInsets.all(15.0),
       padding: const EdgeInsets.all(13.0),
@@ -71,6 +77,25 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
               ),
               validator: (String value) {
                 if (value.trim().isEmpty) {
+                  return 'Password is required';
+                }else {
+                  return null;
+                }
+              },
+            ),
+          ),
+          Divider(),
+          SizedBox(
+            width: 360,
+            child: TextFormField(
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon:Icon(Icons.account_circle),
+                  labelText: 'Name',
+                  hintText: 'Type Name'
+              ),
+              validator: (String value) {
+                if (value.trim().isEmpty) {
                   return 'Nickname is required';
                 }else {
                   return null;
@@ -78,44 +103,14 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
               },
             ),
           ),
-          _signUpWidget()
-        ],
-      ),
-    );
-  }
-
-
-
-  Widget _signUpWidget() {
-    return Column(
-      children: <Widget>[
-        Divider(),
-        SizedBox(
-          width: 360,
-          child: TextFormField(
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                icon:Icon(Icons.account_circle),
-                labelText: 'Name',
-                hintText: 'Type password'
-            ),
-            validator: (String value) {
-              if (value.trim().isEmpty) {
-                return 'Nickname is required';
-              }else {
-                return null;
-              }
-            },
-          ),
-        ),
-        Divider(),
-        Row(
-          children: <Widget>[
-          Icon(Icons.wc,color: Colors.grey,),
+          Divider(),
+          Row(
+            children: <Widget>[
+              Icon(Icons.wc,color: Colors.grey,),
               Radio(
-                value: SingingCharacter.lafayette,
+                value: GenderEnum.man,
                 groupValue: _character,
-                onChanged: (SingingCharacter value) {
+                onChanged: (GenderEnum value) {
                   setState(() {
                     _character = value;
                   });
@@ -124,79 +119,74 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
               new GestureDetector(
                 onTap: () {
                   setState(() {
-                    _character = SingingCharacter.lafayette;
+                    _character = GenderEnum.man;
                   });
                 },
                 child: Text('Man'),
               ),
               SizedBox(width: 20,),
               Radio(
-                value: SingingCharacter.jefferson,
+                value: GenderEnum.woman,
                 groupValue: _character,
-                onChanged: (SingingCharacter value) {
+                onChanged: (GenderEnum value) {
                   setState(() {
                     _character = value;
                   });
                 },
               ),
               new GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _character = SingingCharacter.jefferson;
-                    });
-                  },
-                  child: Text('Woman'),
-                ),
-          ],
-        ),
-        Divider(),
-        SizedBox(
-          width: 360,
-          child:
-          Row(
-            children: <Widget>[
-              Icon(Icons.cake,color: Colors.grey,),
-              Padding(
-                padding: const EdgeInsets.only(left:14.0),
-                child: Container(
-                  width: 260,
-                  child: RaisedButton(
-                    onPressed: () {
-                      _selectDate(context);
-                    },
-                    child: Text(selectDate),
-                    color: Colors.white,
+                onTap: () {
+                  setState(() {
+                    _character = GenderEnum.woman;
+                  });
+                },
+                child: Text('Woman'),
+              ),
+            ],
+          ),
+          Divider(),
+          SizedBox(
+            width: 360,
+            child:
+            Row(
+              children: <Widget>[
+                Icon(Icons.cake,color: Colors.grey,),
+                Padding(
+                  padding: const EdgeInsets.only(left:14.0),
+                  child: Container(
+                    width: 260,
+                    child: RaisedButton(
+                      onPressed: () {
+                        _selectDate(context);
+                      },
+                      child: Text(_selectDateString),
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Row(
-            children: <Widget>[
-              Checkbox(
-                value: _agreedToTOS,
-                onChanged: _setAgreedToTOS,
-              ),
-              GestureDetector(
-                onTap: () => _setAgreedToTOS(!_agreedToTOS),
-                child: const Text(
-                  'I agree to the Terms of Services, Privacy Policy',
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Row(
+              children: <Widget>[
+                Checkbox(
+                  value: _agreedToTerm,
+                  onChanged: _setAgreedToTerm,
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: () => _setAgreedToTerm(!_agreedToTerm),
+                  child: const Text(
+                    'I agree to Terms of Services, Privacy Policy',
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
-  }
-
-  void _setAgreedToTOS(bool newValue) {
-    setState(() {
-      _agreedToTOS = newValue;
-    });
   }
 
   @override

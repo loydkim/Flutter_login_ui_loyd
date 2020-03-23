@@ -8,6 +8,7 @@ class SignUpIntroduce extends StatefulWidget {
 class _SignUpIntroduce extends State<SignUpIntroduce> with AutomaticKeepAliveClientMixin<SignUpIntroduce>{
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Padding(
       padding: const EdgeInsets.only(top:28.0,bottom:28.0),
       child: Column(

@@ -15,10 +15,8 @@ class _SignUpImages extends State<SignUpImages> with AutomaticKeepAliveClientMix
 
   @override
   Widget build(BuildContext context) {
-    return
-//      Container(
-//      child:
-      Padding(
+    super.build(context);
+    return Padding(
         padding: const EdgeInsets.only(top:28.0,bottom:28.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -118,7 +116,6 @@ class _SignUpImages extends State<SignUpImages> with AutomaticKeepAliveClientMix
           ],
         ),
       );
-//    );
   }
 
   Future _getImage() async {
@@ -157,6 +154,7 @@ class _SignUpImages extends State<SignUpImages> with AutomaticKeepAliveClientMix
         iosUiSettings: IOSUiSettings(
             title: 'Cropper',
         ));
+
     if (croppedFile != null) {
       setState(() {
         _imageList[_imagePosition]= croppedFile;

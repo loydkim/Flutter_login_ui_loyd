@@ -7,13 +7,13 @@ class SignIn extends StatefulWidget {
 
 class _SignIn extends State<SignIn> {
 
-  final emailTextController = TextEditingController();
-  final passwordTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
 
   @override
   void dispose() {
-    emailTextController.dispose();
-    passwordTextController.dispose();
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
     super.dispose();
   }
 
@@ -66,7 +66,7 @@ class _SignIn extends State<SignIn> {
                         return null;
                       }
                     },
-                    controller: emailTextController,
+                    controller: _emailTextController,
                   ),
                 ),
                 Divider(),
@@ -87,7 +87,7 @@ class _SignIn extends State<SignIn> {
                         return null;
                       }
                     },
-                    controller: passwordTextController,
+                    controller: _passwordTextController,
                   ),
                 ),
               ],
