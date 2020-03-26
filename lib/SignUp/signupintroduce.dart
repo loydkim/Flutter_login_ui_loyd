@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SignUpIntroduce extends StatefulWidget {
+  SignUpIntroduce(this.introduceTextController);
+  final TextEditingController introduceTextController;
   @override
   State<StatefulWidget> createState() => _SignUpIntroduce();
 }
@@ -25,6 +27,7 @@ class _SignUpIntroduce extends State<SignUpIntroduce> with AutomaticKeepAliveCli
                     border: InputBorder.none,
                     hintText: 'Type about you'
                   ),
+                  controller: widget.introduceTextController,
                 ),
               )
             )

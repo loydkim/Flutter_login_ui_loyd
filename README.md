@@ -2,23 +2,6 @@
 
 A new Flutter application.
 
-<img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main.png" width="300" height="530">.   <img src="https://github.com/loydkim/Flutter_login_ui_loyd/blob/master/main2.png" width="300" height="530">
-
-
-When starting the application first time, they usually request sign up or sign in to get user information. Here is how to make the sign-in screen.
-
-* Develop environment.
-
-- Flutter Version: 1.12.13+hotfix.8
-- Dart Version: 2.7.0
-- Xcode Version: 11.3.1
-- Android Studio: 3.5
-- OS Version: MacOS Catalina 10.15.3
-
-Thank you for watching :)
-
-#Flutter, #CreateAccount, #SignUp, #Signin
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.

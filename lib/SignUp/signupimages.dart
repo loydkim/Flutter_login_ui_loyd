@@ -4,6 +4,8 @@ import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 
 class SignUpImages extends StatefulWidget {
+  SignUpImages(this.parentAction);
+  final ValueChanged<List<dynamic>> parentAction;
   @override
   State<StatefulWidget> createState() => _SignUpImages();
 }
@@ -118,6 +120,13 @@ class _SignUpImages extends State<SignUpImages> with AutomaticKeepAliveClientMix
       );
   }
 
+  void _setGenderToData(String key, dynamic value) {
+    List<dynamic> addData = List<dynamic>();
+    addData.add(key);
+    addData.add(value);
+    widget.parentAction(addData);
+  }
+
   Future _getImage() async {
     // Get image from gallery.
     File image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -157,6 +166,7 @@ class _SignUpImages extends State<SignUpImages> with AutomaticKeepAliveClientMix
 
     if (croppedFile != null) {
       setState(() {
+        _setGenderToData('image$_imagePosition',croppedFile.path);
         _imageList[_imagePosition]= croppedFile;
       });
     }

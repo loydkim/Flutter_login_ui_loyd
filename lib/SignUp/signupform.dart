@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 
 class SignUpForm extends StatefulWidget {
+  SignUpForm(this.emailTextController,
+      this.passwordTextController,
+      this.nameTextController,
+      this.parentAction);
+
+  final TextEditingController emailTextController;
+  final TextEditingController passwordTextController;
+  final TextEditingController nameTextController;
+
+  final ValueChanged<List<dynamic>> parentAction;
+
   @override
   State<StatefulWidget> createState() => _SignUpForm();
 }
 enum GenderEnum { man, woman }
 class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<SignUpForm> {
+  GenderEnum _userGender = GenderEnum.man;
+  String _selectDateString = 'Select your birthday';
 
   bool _agreedToTerm = false;
-  GenderEnum _character = GenderEnum.man;
-
   DateTime _selectedDate = DateTime.now();
-  String _selectDateString = 'Select your birthday';
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -23,10 +33,30 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
       setState(() {
         _selectedDate = picked;
         _selectDateString = "${_selectedDate.toLocal()}".split(' ')[0];
+        _passDataToParent('age',calculateAge(picked));
       });
+    print('your age is ${calculateAge(picked)}');
+  }
+
+  calculateAge(DateTime birthDate) {
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+    int month1 = currentDate.month;
+    int month2 = birthDate.month;
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = currentDate.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age;
   }
 
   void _setAgreedToTerm(bool newValue) {
+    _passDataToParent('term',newValue);
     setState(() {
       _agreedToTerm = newValue;
     });
@@ -62,6 +92,7 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
                   return null;
                 }
               },
+              controller: widget.emailTextController,
             ),
           ),
           Divider(),
@@ -82,6 +113,7 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
                   return null;
                 }
               },
+              controller: widget.passwordTextController,
             ),
           ),
           Divider(),
@@ -101,6 +133,7 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
                   return null;
                 }
               },
+              controller: widget.nameTextController,
             ),
           ),
           Divider(),
@@ -109,17 +142,19 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
               Icon(Icons.wc,color: Colors.grey,),
               Radio(
                 value: GenderEnum.man,
-                groupValue: _character,
+                groupValue: _userGender,
                 onChanged: (GenderEnum value) {
                   setState(() {
-                    _character = value;
+                    _passDataToParent('gender','Man');
+                    _userGender = value;
                   });
                 },
               ),
               new GestureDetector(
                 onTap: () {
                   setState(() {
-                    _character = GenderEnum.man;
+                    _passDataToParent('gender','Man');
+                    _userGender = GenderEnum.man;
                   });
                 },
                 child: Text('Man'),
@@ -127,17 +162,19 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
               SizedBox(width: 20,),
               Radio(
                 value: GenderEnum.woman,
-                groupValue: _character,
+                groupValue: _userGender,
                 onChanged: (GenderEnum value) {
                   setState(() {
-                    _character = value;
+                    _passDataToParent('gender','Woman');
+                    _userGender = value;
                   });
                 },
               ),
               new GestureDetector(
                 onTap: () {
                   setState(() {
-                    _character = GenderEnum.woman;
+                    _passDataToParent('gender','Woman');
+                    _userGender = GenderEnum.woman;
                   });
                 },
                 child: Text('Woman'),
@@ -187,6 +224,13 @@ class _SignUpForm extends State<SignUpForm> with AutomaticKeepAliveClientMixin<S
         ],
       ),
     );
+  }
+
+  void _passDataToParent(String key, dynamic value) {
+    List<dynamic> addData = List<dynamic>();
+    addData.add(key);
+    addData.add(value);
+    widget.parentAction(addData);
   }
 
   @override
